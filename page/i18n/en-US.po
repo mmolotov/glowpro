@@ -1,0 +1,9 @@
+msgid "appName"
+msgstr "GlowPro"
+
+msgid "flashlightTurnOn"
+msgstr "TURN ON"
+
+msgid "flashlightTurnOff"
+msgstr "TURN OFF"
+

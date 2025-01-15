@@ -12,16 +12,8 @@ import {
 
 export const logger = Logger.getLogger('timerr');
 
-export const CONSTANTS = {
-    PAGES: {
-        flashlight: 'page/common/flashlight/index.page',
-        menu:       'page/common/menu/index.page'
-    }
-}
-
 export function assets(type) {
     return (path) => type + '/' + path;
-
 }
 
 export function pauseScreenOff() {

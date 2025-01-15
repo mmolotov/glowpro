@@ -1,39 +1,38 @@
-import {getText} from '@zos/i18n';
 import {px} from '@zos/utils'
 
-import {COLORS, DEVICE_INFO, FLASHLIGHT, VIEW_CONTAINERS} from '../layout/common.layout'
+import {BUTTONS, COLORS, DEVICE_INFO, FLASHLIGHT, PAGES, standardButtonSize, VIEW_CONTAINERS} from '../layout/common.layout'
 
 // brightness control bar
-const yCoefficient = 0.5
-const wCoefficient = 0.75
-const brightnessBarHeight = 40
-const brightnessBarWidth = DEVICE_INFO.DEVICE_WIDTH * wCoefficient
+const yCoefficient = 0.15
+const hCoefficient = 0.7
+const brightnessBarHeight = DEVICE_INFO.DEVICE_HEIGHT * hCoefficient
+const brightnessBarWidth = 50
+const brightnessBarRadius = 25
 const brightnessBarLineWith = 4
 const brightnessBarY = DEVICE_INFO.DEVICE_HEIGHT * yCoefficient
-const brightnessBarX = (DEVICE_INFO.DEVICE_WIDTH - brightnessBarWidth) / 2
+const brightnessBarX = (DEVICE_INFO.DEVICE_WIDTH - brightnessBarWidth - brightnessBarLineWith) / 2
 
-const radius = brightnessBarHeight / 2
-const max = brightnessBarX + brightnessBarWidth - radius - brightnessBarLineWith
-const min = brightnessBarX + radius
+const radius = brightnessBarWidth / 2
+const max = brightnessBarY + brightnessBarHeight - radius
+const min = brightnessBarY + radius
 
 const textSize = 14
 const textH = textSize + 2
 const textW = textH * 3
 
 // turn on/off button
-const buttonSize = 88
-const buttonXCoefficient = 0.4
-const buttonYCoefficient = 0.75
-const buttonX = (DEVICE_INFO.DEVICE_WIDTH - px(buttonSize)) / 2
-const buttonY = DEVICE_INFO.DEVICE_HEIGHT * buttonYCoefficient
-const turnOffLabel = getText('flashlightTurnOff')
-const turnOnLabel = getText('flashlightTurnOn')
+const buttonSize = px(standardButtonSize)
+const buttonXCoefficient = 0.98
+const buttonYCoefficient = 0.50
+const buttonX = (DEVICE_INFO.DEVICE_WIDTH - buttonSize) * buttonXCoefficient
+const buttonY = (DEVICE_INFO.DEVICE_HEIGHT - buttonSize) * buttonYCoefficient
 
 // menu button
-const menuButtonSize = 88
-const menuButtonYCoefficient = 0.05
-const menuButtonX = (DEVICE_INFO.DEVICE_WIDTH - px(menuButtonSize)) / 2
-const menuButtonY = DEVICE_INFO.DEVICE_HEIGHT * menuButtonYCoefficient
+const menuButtonSize = px(standardButtonSize)
+const menuButtonXCoefficient = 1 - buttonXCoefficient
+const menuButtonYCoefficient = buttonYCoefficient
+const menuButtonX = (DEVICE_INFO.DEVICE_WIDTH - menuButtonSize) * menuButtonXCoefficient
+const menuButtonY = (DEVICE_INFO.DEVICE_HEIGHT - menuButtonSize) * menuButtonYCoefficient
 
 const CONTROLS = {
     brightness: {
@@ -42,13 +41,13 @@ const CONTROLS = {
             y:          brightnessBarY,
             w:          brightnessBarWidth,
             h:          brightnessBarHeight,
-            radius:     20,// The rectangle's rounded corners.
+            radius:     brightnessBarRadius,// The rectangle's rounded corners.
             line_width: brightnessBarLineWith,
             color:      COLORS.SYS.SCROLL_BAR
         },
         control: {
-            center_x: max,
-            center_y: brightnessBarY + radius,
+            center_x: brightnessBarX + radius,
+            center_y: min,
             radius:   radius,
             color:    COLORS.SYS.BUTTON,
             min:      min,
@@ -56,8 +55,8 @@ const CONTROLS = {
         },
         controlSetValue(value) {
             return {
-                center_x: value,
-                center_y: brightnessBarY + radius,
+                center_x: brightnessBarX + radius,
+                center_y: value,
                 radius:   radius,
                 color:    COLORS.SYS.BUTTON
             }
@@ -68,8 +67,8 @@ const CONTROLS = {
                 y:          buttonY,
                 w:          -1,
                 h:          -1,
-                normal_src: (state ? 'fb_on.png' : 'fb_off.png'),
-                press_src:  (state ? 'fb_on_pressed.png' : 'fb_off_pressed.png'),
+                normal_src: BUTTONS.flashlightSrc(state),
+                press_src:  BUTTONS.flashlightPressSrc(state),
                 click_func: clickCallback
             }
         },
@@ -79,13 +78,13 @@ const CONTROLS = {
                 y:          buttonY,
                 w:          -1,
                 h:          -1,
-                normal_src: (state ? 'fb_on.png' : 'fb_off.png'),
-                press_src:  (state ? 'fb_on_pressed.png' : 'fb_off_pressed.png')
+                normal_src: BUTTONS.flashlightSrc(state),
+                press_src:  BUTTONS.flashlightPressSrc(state)
             }
         },
         text(value) {
             return {
-                x:         DEVICE_INFO.DEVICE_WIDTH / 2 - getTextYShift(value),
+                x:         (DEVICE_INFO.DEVICE_WIDTH - textH) / 2 - getTextYShift(value),
                 y:         brightnessBarY + brightnessBarHeight,
                 w:         textW,
                 h:         textH,
@@ -102,8 +101,8 @@ const CONTROLS = {
                 y:          menuButtonY,
                 w:          -1,
                 h:          -1,
-                normal_src: 'menu.png',
-                press_src:  'menu_pressed.png',
+                normal_src: BUTTONS.menu.normal_src,
+                press_src:  BUTTONS.menu.press_src,
                 click_func: clickCallback
             }
         }
@@ -117,17 +116,17 @@ function getTextYShift(value) {
     if (value < 99) {
         return 3
     }
-    return 5
+    return 8
 }
 
 function calculatePosition(info = {x: 0, y: 0}) {
-    const result = Math.min(max, Math.max(min, info.x))
+    const result = Math.min(max, Math.max(min, info.y))
     return result
 }
 
 function toBrightnessPercentage(value) {
-    let valueShifted = value - min
+    let valueShifted = value - max
     return Math.abs(parseInt(valueShifted / (max - min) * 100))
 }
 
-export {DEVICE_INFO, COLORS, CONTROLS, VIEW_CONTAINERS, FLASHLIGHT, calculatePosition, toBrightnessPercentage}
+export {DEVICE_INFO, COLORS, CONTROLS, VIEW_CONTAINERS, FLASHLIGHT, PAGES, calculatePosition, toBrightnessPercentage}

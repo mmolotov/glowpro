@@ -1,9 +1,7 @@
-// import {calculatePosition, CONTROLS, FLASHLIGHT, toBrightnessPercentage, VIEW_CONTAINERS} from 'zosLoader:./index.page.[pf].layout.js';
-import {calculatePosition, CONTROLS, FLASHLIGHT, toBrightnessPercentage, VIEW_CONTAINERS} from './index.page.layout.v.js';
-import {CONSTANTS, getCurrentBrightnessSettings, logger, pauseScreenOff, resetScreenOff, setBrightnessSettings} from '../../../utils';
-import {push} from '@zos/router'
-
+import {replace} from '@zos/router'
 import {createWidget, event, prop, widget} from '@zos/ui'
+import {calculatePosition, CONTROLS, FLASHLIGHT, PAGES, toBrightnessPercentage, VIEW_CONTAINERS} from './index.page.layout.js';
+import {getCurrentBrightnessSettings, logger, pauseScreenOff, resetScreenOff, setBrightnessSettings} from '../../../utils';
 
 let settings = getCurrentBrightnessSettings()
 
@@ -16,7 +14,7 @@ Page({
         let background = backgroundContainer.createWidget(widget.FILL_RECT, FLASHLIGHT.WHITE)
         let controlsContainer = createWidget(widget.VIEW_CONTAINER, VIEW_CONTAINERS.fullScreenContainer(false, 1))
         let menuButton = controlsContainer.createWidget(widget.BUTTON, CONTROLS.menu.button((btn) => {
-            push({url: CONSTANTS.PAGES.menu})
+            replace({url: PAGES.menu})
         }))
         let brightnessValue = controlsContainer.createWidget(widget.TEXT, CONTROLS.brightness.text(100))
         let brightnessControl = controlsContainer.createWidget(widget.CIRCLE, CONTROLS.brightness.control)

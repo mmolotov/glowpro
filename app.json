@@ -29,8 +29,10 @@
       "module": {
         "page": {
           "pages": [
+            "page/common/menu/index.page",
             "page/common/flashlight/index.page",
-            "page/common/menu/index.page"
+            "page/common/blinker/index.page",
+            "page/common/morse/index.page"
           ]
         }
       },

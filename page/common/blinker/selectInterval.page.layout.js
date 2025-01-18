@@ -20,7 +20,7 @@ const sliderControlMin = sliderBarY + sliderBarRadius
 const sliderControlX = sliderBarX + sliderBarRadius
 //slider text
 const textSize = 28
-const textH = textSize + 2
+const textH = textSize * 1.2
 const textW = textH * 5
 
 const sliderValueMin = 100
@@ -28,13 +28,15 @@ const sliderValueMax = 1_000
 const sliderValueStep = 50
 
 const CONTROLS = {
-    sliderControl: {
-        center_x: sliderControlX,
-        center_y: sliderControlMin,
-        radius:   sliderControlRadius,
-        color:    COLORS.TEXT.BUTTON
+    sliderControl(valueY = 0) {
+        return {
+            center_x: sliderControlX,
+            center_y: Math.max(sliderControlMin, Math.min(sliderControlMax, valueY)),
+            radius:   sliderControlRadius,
+            color:    COLORS.TEXT.BUTTON
+        }
     },
-    sliderBar:     {
+    sliderBar: {
         x:          sliderBarX,
         y:          sliderBarY,
         w:          sliderBarW,
@@ -56,7 +58,7 @@ const CONTROLS = {
             color:    COLORS.TEXT.BUTTON
         }
     },
-    sliderText() {
+    sliderText(value) {
         return {
             x:         DEVICE_INFO.DEVICE_WIDTH / 2,
             y:         DEVICE_INFO.DEVICE_HEIGHT / 2,
@@ -64,7 +66,7 @@ const CONTROLS = {
             h:         textH,
             color:     COLORS.TEXT.TITLE,
             text_size: textSize,
-            text:      sliderValueMax + ' ' + getText(TRANSLATION_KEYS.milis)
+            text:      Math.min(sliderValueMax, Math.max(sliderValueMin, value)) + ' ' + getText(TRANSLATION_KEYS.milis)
         }
     },
     sliderTextSetNewValue(info = {x: 0, y: 0}) {

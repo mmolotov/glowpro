@@ -13,3 +13,5 @@ msgstr "Morse"
 msgid "ms"
 msgstr "ms"
 
+msgid "select_color"
+msgstr "Select at least 1 color"

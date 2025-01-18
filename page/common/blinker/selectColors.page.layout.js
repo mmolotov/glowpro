@@ -1,5 +1,6 @@
 import {px} from '@zos/utils'
-import {BUTTONS, COLORS, COMMON, DEVICE_INFO, PAGES, systemButtonSize} from '../layout/common.layout'
+import {getText} from '@zos/i18n'
+import {BUTTONS, COLORS, COMMON, DEVICE_INFO, PAGES, systemButtonSize, TRANSLATION_KEYS} from '../layout/common.layout'
 
 const colorsCheckBoxX = DEVICE_INFO.DEVICE_WIDTH * 0.15
 const colorsCheckBoxY = DEVICE_INFO.DEVICE_HEIGHT * 0.20
@@ -74,6 +75,9 @@ const CONTROLS = {
             h:     DEVICE_INFO.DEVICE_WIDTH,
             color: color
         }
+    },
+    selectColorToast: {
+        content: getText(TRANSLATION_KEYS.selectColor)
     }
 }
 

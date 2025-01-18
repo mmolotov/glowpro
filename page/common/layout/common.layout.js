@@ -88,10 +88,11 @@ export const PAGES = {
 }
 
 export const TRANSLATION_KEYS = {
-    flashlight: 'flashlight',
-    blinker:    'blinker',
-    morse:      'morse',
-    milis:      'ms'
+    flashlight:  'flashlight',
+    blinker:     'blinker',
+    morse:       'morse',
+    milis:       'ms',
+    selectColor: 'select_color'
 }
 
 export const COMMON = {

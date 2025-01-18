@@ -1,12 +1,12 @@
 import {getText} from '@zos/i18n';
 import {px} from '@zos/utils'
 
-import {BUTTONS, COLORS, DEVICE_INFO, PAGES, standardButtonSize, TRANSLATION_KEYS, COMMON} from '../layout/common.layout'
+import {BUTTONS, COLORS, COMMON, DEVICE_INFO, PAGES, standardButtonSize, TRANSLATION_KEYS} from '../layout/common.layout'
 
 const buttonsShift = px(20)
 const buttonSize = px(standardButtonSize)
-const xCoefficient = 0.2
-const yCoefficient = 0.25
+const xCoefficient = 0.25
+const yCoefficient = 0.2
 const buttonX = DEVICE_INFO.DEVICE_WIDTH * xCoefficient
 const buttonYShift = buttonSize + buttonsShift
 
@@ -17,11 +17,11 @@ function getButtonY(index) {
 const textSize = 28
 const textH = textSize * 1.5
 const textW = textH * 4
-const textShift = px(10)
+const textShift = px(20)
 const textX = buttonX + buttonSize + textShift
 
 function getTextY(index) {
-    return getButtonY(index) + textShift
+    return getButtonY(index) + (buttonSize - textH) / 2
 }
 
 const CONTROLS = {

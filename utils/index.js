@@ -39,6 +39,8 @@ export function getCurrentBrightnessSettings() {
 }
 
 export function setBrightnessSettings(settings = {autoBright: false, brightness: 50}) {
+    logger.debug('> > > set auto brightness ' + settings.autoBright)
     setAutoBrightness(settings)
+    logger.debug('> > > set brightness ' + settings.brightness)
     setBrightness(settings)
 }

@@ -105,12 +105,12 @@ export const COMMON = {
             z_index:       zIndex
         }
     },
-    fullScreenRectangle(color = 0) {
+    fullScreenRectangle(color = 0, index = 0) {
         return {
             x:     0,
-            y:     0,
-            w:     DEVICE_INFO.DEVICE_HEIGHT,
-            h:     DEVICE_INFO.DEVICE_WIDTH,
+            y:     0 + DEVICE_INFO.DEVICE_HEIGHT * index,
+            h:     DEVICE_INFO.DEVICE_HEIGHT,
+            w:     DEVICE_INFO.DEVICE_WIDTH,
             color: color
         }
     }

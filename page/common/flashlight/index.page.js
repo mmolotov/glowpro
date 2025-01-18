@@ -1,67 +1,45 @@
-import {replace} from '@zos/router'
-import {createWidget, event, prop, widget} from '@zos/ui'
-import {calculatePosition, COLORS, COMMON, CONTROLS, PAGES, toBrightnessPercentage} from './index.page.layout.js';
-import {getCurrentBrightnessSettings, logger, pauseScreenOff, resetScreenOff, setBrightnessSettings} from '../../../utils';
+import {createWidget, prop, widget} from '@zos/ui'
+import {setScrollMode} from '@zos/page'
 
-let settings = getCurrentBrightnessSettings()
+import {COLORS, COMMON, CONTROLS} from './index.page.layout.js';
+import {getCurrentBrightnessSettings, pauseScreenOff, resetScreenOff, setBrightnessSettings} from '../../../utils';
+
+let settings = {}
 
 Page({
+    onInit(params) {
+        settings = getCurrentBrightnessSettings()
+    },
     build() {
         pauseScreenOff()
+        setScrollMode(CONTROLS.scrollMode(Object.keys(COLORS.FLASHLIGHT).length))
+
         let state = true
-
-        let backgroundContainer = createWidget(widget.VIEW_CONTAINER, COMMON.fullScreenContainer())
-        let background = backgroundContainer.createWidget(widget.FILL_RECT, COMMON.fullScreenRectangle(COLORS.FLASHLIGHT.WHITE))
-        let controlsContainer = createWidget(widget.VIEW_CONTAINER, COMMON.fullScreenContainer(false, 1))
-        let menuButton = controlsContainer.createWidget(widget.BUTTON, CONTROLS.menu.button((btn) => {
-            replace({url: PAGES.menu})
-        }))
-        let brightnessValue = controlsContainer.createWidget(widget.TEXT, CONTROLS.brightness.text(100))
-        let brightnessControl = controlsContainer.createWidget(widget.CIRCLE, CONTROLS.brightness.control)
-        let brightnessBar = controlsContainer.createWidget(widget.STROKE_RECT, CONTROLS.brightness.bar)
-
-        let turnOffButton = controlsContainer.createWidget(widget.BUTTON, CONTROLS.brightness.button(state, (btn) => {
-            switchState(btn, brightnessControl)
-        }))
-
-        brightnessBar.addEventListener(event.CLICK_UP, (info) => {
-            brightnessBarSetValue(brightnessControl, info)
-        })
-        brightnessBar.addEventListener(event.MOVE, (info) => {
-            brightnessBarSetValue(brightnessControl, info)
-        })
-        setFlashLightBrightness(100)
-
-        function switchState(turnOffButton, brightnessControl) {
-            turnButtonSwitchState(turnOffButton, !state)
-            brightnessBarSetValue(brightnessControl,
-                    state ? {x: CONTROLS.brightness.control.max, y: 0} : {x: 0, y: CONTROLS.brightness.control.max})
+        let index = 0
+        for (let key in COLORS.FLASHLIGHT) {
+            const color = COLORS.FLASHLIGHT[key]
+            const coloredScreen = createWidget(widget.FILL_RECT, COMMON.fullScreenRectangle(color, index++))
         }
+        const scrollBar = createWidget(widget.PAGE_SCROLLBAR, {})
+
+        let controlsContainer = createWidget(widget.VIEW_CONTAINER, COMMON.fullScreenContainer(false, 1))
+        let turnOffButton = controlsContainer.createWidget(widget.BUTTON, CONTROLS.flashLightButton(state, (btn) => {
+            setScreenBrightness(state ? 0 : 100)
+        }))
+        setScreenBrightness(100)
 
         function turnButtonSwitchState(turnOffButton, newState) {
             state = newState
-            turnOffButton.setProperty(prop.MORE, CONTROLS.brightness.buttonSwitch(state))
+            turnOffButton.setProperty(prop.MORE, CONTROLS.flashLightButtonSwitch(state))
         }
 
-        function brightnessBarSetValue(brightnessControl, info) {
-            let newPosition = calculatePosition(info)
-            brightnessControl.setProperty(prop.MORE, CONTROLS.brightness.controlSetValue(newPosition))
-            setFlashLightBrightness(toBrightnessPercentage(newPosition))
-        }
-
-        function setFlashLightBrightness(value) {
-            logger.debug('> > > set brightness ' + value)
+        function setScreenBrightness(value) {
             setBrightnessSettings({autoBright: false, brightness: value})
-            setBrightnessTextValue(value)
             if (value === 0) {
                 turnButtonSwitchState(turnOffButton, false)
             } else if (value > 0) {
                 turnButtonSwitchState(turnOffButton, true)
             }
-        }
-
-        function setBrightnessTextValue(value) {
-            brightnessValue.setProperty(prop.MORE, CONTROLS.brightness.text(value))
         }
     },
     onDestroy() {

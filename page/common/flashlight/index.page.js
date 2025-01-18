@@ -1,6 +1,6 @@
 import {replace} from '@zos/router'
 import {createWidget, event, prop, widget} from '@zos/ui'
-import {calculatePosition, CONTROLS, FLASHLIGHT, PAGES, toBrightnessPercentage, VIEW_CONTAINERS} from './index.page.layout.js';
+import {calculatePosition, COLORS, COMMON, CONTROLS, PAGES, toBrightnessPercentage} from './index.page.layout.js';
 import {getCurrentBrightnessSettings, logger, pauseScreenOff, resetScreenOff, setBrightnessSettings} from '../../../utils';
 
 let settings = getCurrentBrightnessSettings()
@@ -10,9 +10,9 @@ Page({
         pauseScreenOff()
         let state = true
 
-        let backgroundContainer = createWidget(widget.VIEW_CONTAINER, VIEW_CONTAINERS.fullScreenContainer())
-        let background = backgroundContainer.createWidget(widget.FILL_RECT, FLASHLIGHT.WHITE)
-        let controlsContainer = createWidget(widget.VIEW_CONTAINER, VIEW_CONTAINERS.fullScreenContainer(false, 1))
+        let backgroundContainer = createWidget(widget.VIEW_CONTAINER, COMMON.fullScreenContainer())
+        let background = backgroundContainer.createWidget(widget.FILL_RECT, COMMON.fullScreenRectangle(COLORS.FLASHLIGHT.WHITE))
+        let controlsContainer = createWidget(widget.VIEW_CONTAINER, COMMON.fullScreenContainer(false, 1))
         let menuButton = controlsContainer.createWidget(widget.BUTTON, CONTROLS.menu.button((btn) => {
             replace({url: PAGES.menu})
         }))

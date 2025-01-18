@@ -10,3 +10,6 @@ msgstr "Blinker"
 msgid "morse"
 msgstr "Morse"
 
+msgid "ms"
+msgstr "ms"
+

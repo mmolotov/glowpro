@@ -31,7 +31,9 @@
           "pages": [
             "page/common/menu/index.page",
             "page/common/flashlight/index.page",
-            "page/common/blinker/index.page",
+            "page/common/blinker/selectColors.page",
+            "page/common/blinker/selectInterval.page",
+            "page/common/blinker/blinker.page",
             "page/common/morse/index.page"
           ]
         }

@@ -13,11 +13,11 @@ Page({
         })
 
         let blinkerButton = createWidget(widget.BUTTON, CONTROLS.blinkerButton((btn) => {
-            push({url: PAGES.blinker})
+            push({url: PAGES.blinkerSelectColors})
         }));
         let blinkerText = createWidget(widget.TEXT, CONTROLS.blinkerText())
         blinkerText.addEventListener(event.CLICK_UP, (e) => {
-            push({url: PAGES.blinker})
+            push({url: PAGES.blinkerSelectColors})
         })
 
         let morseButton = createWidget(widget.BUTTON, CONTROLS.morseButton((btn) => {

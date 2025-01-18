@@ -1,7 +1,7 @@
 import {getText} from '@zos/i18n';
 import {px} from '@zos/utils'
 
-import {BUTTONS, COLORS, DEVICE_INFO, PAGES, standardButtonSize, TRANSLATION_KEYS, VIEW_CONTAINERS} from '../layout/common.layout'
+import {BUTTONS, COLORS, DEVICE_INFO, PAGES, standardButtonSize, TRANSLATION_KEYS, COMMON} from '../layout/common.layout'
 
 const buttonsShift = px(20)
 const buttonSize = px(standardButtonSize)
@@ -67,4 +67,4 @@ const CONTROLS = {
     }
 }
 
-export {DEVICE_INFO, COLORS, VIEW_CONTAINERS, CONTROLS, PAGES}
+export {DEVICE_INFO, COLORS, COMMON, CONTROLS, PAGES}

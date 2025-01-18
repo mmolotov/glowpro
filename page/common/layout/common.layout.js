@@ -65,31 +65,36 @@ export const COLORS = {
         HR_WARM_UP:   0x229EBE
     },
     FLASHLIGHT: {
-        WHITE:  0xFFFFFF,
-        GREEN:  0x399E5A,
-        YELLOW: 0xF7B538,
-        PINK:   0xF2559D,
-        PURPLE: 0x984CE5,
-        RED:    0xF20000,
-        BLUE:   0x3CA4CE
+        WHITE:     0xFFFFFF,
+        RED:       0xF20000,
+        ORANGE:    0xDE6D30,
+        YELLOW:    0xF7B538,
+        GREEN:     0x399E5A,
+        BLUE:      0x3CA4CE,
+        DARK_BLUE: 0x0000FF,
+        PURPLE:    0x984CE5,
+        PINK:      0xF2559D
     },
     BLACK:      0x000000
 }
 
 export const PAGES = {
-    blinker:    'page/common/blinker/index.page',
-    flashlight: 'page/common/flashlight/index.page',
-    menu:       'page/common/menu/index.page',
-    morse:      'page/common/morse/index.page'
+    blinkerSelectColors:   'page/common/blinker/selectColors.page',
+    blinkerSelectInterval: 'page/common/blinker/selectInterval.page',
+    blinker:               'page/common/blinker/blinker.page',
+    flashlight:            'page/common/flashlight/index.page',
+    menu:                  'page/common/menu/index.page',
+    morse:                 'page/common/morse/index.page'
 }
 
 export const TRANSLATION_KEYS = {
     flashlight: 'flashlight',
     blinker:    'blinker',
-    morse:      'morse'
+    morse:      'morse',
+    milis:      'ms'
 }
 
-export const VIEW_CONTAINERS = {
+export const COMMON = {
     fullScreenContainer(scrollEnabled = false, zIndex = 0) {
         return {
             x:             0,
@@ -99,39 +104,53 @@ export const VIEW_CONTAINERS = {
             scroll_enable: scrollEnabled ? 1 : 0,
             z_index:       zIndex
         }
+    },
+    fullScreenRectangle(color = 0) {
+        return {
+            x:     0,
+            y:     0,
+            w:     DEVICE_INFO.DEVICE_HEIGHT,
+            h:     DEVICE_INFO.DEVICE_WIDTH,
+            color: color
+        }
     }
 }
+export const standardBottomButtonSize = 88
 export const standardButtonSize = 88
 export const systemButtonSize = 64
 
 export const BUTTONS = {
-    menu:          {
+    menu:           {
         normal_src: 'menu.png',
         press_src:  'menu_pressed.png'
     },
-    flashlightOn:  {
+    flashlightOn:   {
         normal_src: 'fb_on.png',
         press_src:  'fb_on_pressed.png'
     },
-    flashlightOff: {
+    flashlightOff:  {
         normal_src: 'fb_off.png',
         press_src:  'fb_off_pressed.png'
+    },
+    confirm_button: {
+        normal_src: 'confirm_button.png',
+        press_src:  'confirm_button_pressed.png'
     },
     flashlightSrc(state) {
         return state ? BUTTONS.flashlightOn.normal_src : BUTTONS.flashlightOff.normal_src
     },
     flashlightPressSrc(state) {
         return state ? BUTTONS.flashlightOn.press_src : BUTTONS.flashlightOff.press_src
-    }
-}
-
-export const FLASHLIGHT = {
-    WHITE: {
-        x:      0,
-        y:      0,
-        w:      DEVICE_INFO.DEVICE_WIDTH,
-        h:      DEVICE_INFO.DEVICE_HEIGHT,
-        radius: 0,
-        color:  COLORS.FLASHLIGHT.WHITE
+    },
+    startButton(clickCallback) {
+        return {
+            x:          0,
+            y:          DEVICE_INFO.DEVICE_HEIGHT - px(standardBottomButtonSize),
+            w:          DEVICE_INFO.DEVICE_WIDTH,
+            h:          px(standardBottomButtonSize),
+            normal_src: BUTTONS.confirm_button.normal_src,
+            press_src:  BUTTONS.confirm_button.press_src,
+            click_func: clickCallback
+        }
     }
 }

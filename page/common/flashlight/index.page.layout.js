@@ -1,6 +1,6 @@
 import {px} from '@zos/utils'
 
-import {BUTTONS, COLORS, DEVICE_INFO, FLASHLIGHT, PAGES, standardButtonSize, VIEW_CONTAINERS} from '../layout/common.layout'
+import {BUTTONS, COLORS, DEVICE_INFO, PAGES, standardButtonSize, COMMON} from '../layout/common.layout'
 
 // brightness control bar
 const yCoefficient = 0.15
@@ -129,4 +129,4 @@ function toBrightnessPercentage(value) {
     return Math.abs(parseInt(valueShifted / (max - min) * 100))
 }
 
-export {DEVICE_INFO, COLORS, CONTROLS, VIEW_CONTAINERS, FLASHLIGHT, PAGES, calculatePosition, toBrightnessPercentage}
+export {DEVICE_INFO, COLORS, CONTROLS, COMMON, PAGES, calculatePosition, toBrightnessPercentage}

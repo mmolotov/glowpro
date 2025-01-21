@@ -1,5 +1,7 @@
 import {getDeviceInfo} from '@zos/device';
-import {px} from '@zos/utils';
+import {getText} from '@zos/i18n';
+import {align, text_style} from '@zos/ui'
+import {px} from '@zos/utils'
 
 export const {width: DEVICE_WIDTH, height: DEVICE_HEIGHT} = getDeviceInfo();
 
@@ -79,20 +81,26 @@ export const COLORS = {
 }
 
 export const PAGES = {
+    blinker:               'page/common/blinker/blinker.page',
     blinkerSelectColors:   'page/common/blinker/selectColors.page',
     blinkerSelectInterval: 'page/common/blinker/selectInterval.page',
-    blinker:               'page/common/blinker/blinker.page',
     flashlight:            'page/common/flashlight/index.page',
     menu:                  'page/common/menu/index.page',
+    morseSetup:            'page/common/morse/recorder.page',
     morse:                 'page/common/morse/index.page'
 }
 
 export const TRANSLATION_KEYS = {
-    flashlight:  'flashlight',
-    blinker:     'blinker',
-    morse:       'morse',
-    milis:       'ms',
-    selectColor: 'select_color'
+    blinker:            'blinker',
+    flashlight:         'flashlight',
+    milis:              'ms',
+    morse:              'morse',
+    morseEmptyRecord:   'morse_empty_record',
+    morseSetup:         'morse_setup',
+    selectColor:        'select_color',
+    selectColors:       'select_colors',
+    selectInterval:     'select_interval',
+    swipeToSelectColor: 'swipe_to_select_color'
 }
 
 export const COMMON = {
@@ -113,6 +121,20 @@ export const COMMON = {
             h:     DEVICE_INFO.DEVICE_HEIGHT,
             w:     DEVICE_INFO.DEVICE_WIDTH,
             color: color
+        }
+    },
+    header(translationKey = '') {
+        return {
+            x:          DEVICE_INFO.DEVICE_WIDTH * 0.2,
+            y:          px(40),
+            w:          DEVICE_INFO.DEVICE_HEIGHT * 3 / 5,
+            h:          px(40),
+            color:      COLORS.TEXT.TITLE,
+            text_size:  35,
+            align_h:    align.CENTER_H,
+            align_v:    align.CENTER_V,
+            text_style: text_style.NONE,
+            text:       getText(translationKey)
         }
     }
 }

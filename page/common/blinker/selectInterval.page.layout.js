@@ -1,12 +1,16 @@
 import {getText} from '@zos/i18n';
+import {align, text_style} from '@zos/ui'
 
 import {BUTTONS, COLORS, COMMON, DEVICE_INFO, PAGES, TRANSLATION_KEYS} from '../layout/common.layout'
 
 //slider
-const yCoefficient = 0.15
-const xCoefficient = 0.2
-const hCoefficient = 0.6
+const sliderValueMin = 100
+const sliderValueMax = 1_000
+const sliderValueStep = 50
 // slider bar
+const yCoefficient = 0.2
+const xCoefficient = 0.6
+const hCoefficient = 0.55
 const sliderBarLineWith = 4
 const sliderBarW = 100
 const sliderBarRadius = sliderBarW / 2
@@ -20,12 +24,12 @@ const sliderControlMin = sliderBarY + sliderBarRadius
 const sliderControlX = sliderBarX + sliderBarRadius
 //slider text
 const textSize = 28
-const textH = textSize * 1.2
+const textH = textSize
 const textW = textH * 5
-
-const sliderValueMin = 100
-const sliderValueMax = 1_000
-const sliderValueStep = 50
+const textXCoefficient = 0.2
+const textYCoefficient = 0.5
+const textX = DEVICE_INFO.DEVICE_WIDTH * textXCoefficient
+const textY = DEVICE_INFO.DEVICE_HEIGHT * textYCoefficient - textH / 2
 
 const CONTROLS = {
     sliderControl(valueY = 0) {
@@ -60,13 +64,16 @@ const CONTROLS = {
     },
     sliderText(value) {
         return {
-            x:         DEVICE_INFO.DEVICE_WIDTH / 2,
-            y:         DEVICE_INFO.DEVICE_HEIGHT / 2,
-            w:         textW,
-            h:         textH,
-            color:     COLORS.TEXT.TITLE,
-            text_size: textSize,
-            text:      Math.min(sliderValueMax, Math.max(sliderValueMin, value)) + ' ' + getText(TRANSLATION_KEYS.milis)
+            x:          textX,
+            y:          textY,
+            w:          textW,
+            h:          textH,
+            color:      COLORS.TEXT.TITLE,
+            text_size:  textSize,
+            align_h:    align.RIGHT,
+            align_v:    align.CENTER_V,
+            text_style: text_style.NONE,
+            text:       Math.min(sliderValueMax, Math.max(sliderValueMin, value)) + ' ' + getText(TRANSLATION_KEYS.milis)
         }
     },
     sliderTextSetNewValue(info = {x: 0, y: 0}) {
@@ -91,4 +98,4 @@ function calculateSliderValue(info = {x: 0, y: 0}) {
     return sliderValueMin + Math.round((valueInPercents / 100) * (sliderValueMax - sliderValueMin) / sliderValueStep) * sliderValueStep
 }
 
-export {DEVICE_INFO, COLORS, COMMON, CONTROLS, PAGES, BUTTONS, calculateSliderY, calculateSliderValue}
+export {DEVICE_INFO, COLORS, COMMON, CONTROLS, PAGES, BUTTONS, calculateSliderValue}

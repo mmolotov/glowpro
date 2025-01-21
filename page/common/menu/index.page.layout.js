@@ -14,7 +14,7 @@ function getButtonY(index) {
     return DEVICE_INFO.DEVICE_HEIGHT * yCoefficient + buttonYShift * index
 }
 
-const textSize = 28
+const textSize = 35
 const textH = textSize * 1.5
 const textW = textH * 4
 const textShift = px(20)

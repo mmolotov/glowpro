@@ -30,10 +30,11 @@
         "page": {
           "pages": [
             "page/common/menu/index.page",
-            "page/common/flashlight/index.page",
+            "page/common/blinker/blinker.page",
             "page/common/blinker/selectColors.page",
             "page/common/blinker/selectInterval.page",
-            "page/common/blinker/blinker.page",
+            "page/common/flashlight/index.page",
+            "page/common/morse/recorder.page",
             "page/common/morse/index.page"
           ]
         }

@@ -1,7 +1,8 @@
 import {px} from '@zos/utils'
 import {SCROLL_MODE_SWIPER} from '@zos/page'
+import {getText} from '@zos/i18n'
 
-import {BUTTONS, COLORS, COMMON, DEVICE_INFO, PAGES, standardButtonSize} from '../layout/common.layout'
+import {BUTTONS, COLORS, COMMON, DEVICE_INFO, PAGES, standardButtonSize, TRANSLATION_KEYS} from '../layout/common.layout'
 
 // turn on/off button
 const buttonSize = px(standardButtonSize)
@@ -48,16 +49,8 @@ const CONTROLS = {
             press_src:  BUTTONS.flashlightPressSrc(state)
         }
     },
-    menuButton(clickCallback) {
-        return {
-            x:          menuButtonX,
-            y:          menuButtonY,
-            w:          -1,
-            h:          -1,
-            normal_src: BUTTONS.menu.normal_src,
-            press_src:  BUTTONS.menu.press_src,
-            click_func: clickCallback
-        }
+    selectColorToast: {
+        content: getText(TRANSLATION_KEYS.swipeToSelectColor)
     }
 }
 export {DEVICE_INFO, COLORS, CONTROLS, COMMON, PAGES}

@@ -10,12 +10,12 @@ let settings = {}
 Page({
     onInit(params) {
         settings = getCurrentBrightnessSettings()
+        pauseScreenOff()
         let paramsObject = JSON.parse(params);
         colors = paramsObject.colors
         interval = paramsObject.interval
     },
     build() {
-        pauseScreenOff()
         setBrightnessSettings({autoBright: false, brightness: 100})
         const coloredScreen = createWidget(widget.FILL_RECT, COMMON.fullScreenRectangle(colors[0]))
 

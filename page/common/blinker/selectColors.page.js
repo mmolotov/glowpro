@@ -4,6 +4,7 @@ import {LocalStorage} from '@zos/storage'
 import {showToast} from '@zos/interaction'
 
 import {BUTTONS, COLORS, COMMON, CONTROLS, getText, PAGES} from './selectColors.page.layout.js';
+import {TRANSLATION_KEYS} from '../layout/common.layout';
 
 const selectedColors = 'blinker.selectedColors'
 const storage = new LocalStorage()
@@ -14,6 +15,7 @@ Page({
     build() {
         //draw color labels
         const colorsContainer = createWidget(widget.VIEW_CONTAINER, COMMON.fullScreenContainer(true, 0))
+        let header = colorsContainer.createWidget(widget.TEXT, COMMON.header(TRANSLATION_KEYS.selectColors))
         const scrollBar = createWidget(widget.PAGE_SCROLLBAR, {target: colorsContainer})
         const backgroundContainer = createWidget(widget.VIEW_CONTAINER, COMMON.fullScreenContainer(false, 1))
         let index = 0

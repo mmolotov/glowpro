@@ -21,11 +21,11 @@ Page({
         })
 
         let morseButton = createWidget(widget.BUTTON, CONTROLS.morseButton((btn) => {
-            push({url: PAGES.morse})
+            push({url: PAGES.morseSetup})
         }));
         let morseText = createWidget(widget.TEXT, CONTROLS.morseText())
         morseText.addEventListener(event.CLICK_UP, (e) => {
-            push({url: PAGES.morse})
+            push({url: PAGES.morseSetup})
         })
     }
 });

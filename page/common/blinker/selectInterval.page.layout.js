@@ -1,7 +1,7 @@
 import {getText} from '@zos/i18n';
 import {align, text_style} from '@zos/ui'
 
-import {BUTTONS, COLORS, COMMON, DEVICE_INFO, PAGES, TRANSLATION_KEYS} from '../layout/common.layout'
+import {COLORS, DEVICE_INFO, TRANSLATION_KEYS} from '../layout/common.layout'
 
 //slider
 const sliderValueMin = 100
@@ -98,4 +98,4 @@ function calculateSliderValue(info = {x: 0, y: 0}) {
     return sliderValueMin + Math.round((valueInPercents / 100) * (sliderValueMax - sliderValueMin) / sliderValueStep) * sliderValueStep
 }
 
-export {DEVICE_INFO, COLORS, COMMON, CONTROLS, PAGES, BUTTONS, calculateSliderValue}
+export {CONTROLS, calculateSliderValue}

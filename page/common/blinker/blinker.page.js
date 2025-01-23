@@ -1,7 +1,7 @@
 import {createWidget, prop, widget} from '@zos/ui'
 
 import {getCurrentBrightnessSettings, pauseScreenOff, resetScreenOff, setBrightnessSettings} from '../../../utils';
-import {COMMON} from './blinker.page.layout.js';
+import {COMMON} from '../layout/common.layout';
 
 let colors = []
 let interval = 500

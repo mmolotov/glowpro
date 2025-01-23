@@ -1,6 +1,6 @@
 import {px} from '@zos/utils'
 import {getText} from '@zos/i18n'
-import {BUTTONS, COLORS, COMMON, DEVICE_INFO, PAGES, systemButtonSize, TRANSLATION_KEYS} from '../layout/common.layout'
+import {DEVICE_INFO, systemButtonSize, TRANSLATION_KEYS} from '../layout/common.layout'
 
 const colorsCheckBoxX = DEVICE_INFO.DEVICE_WIDTH * 0.15
 const colorsCheckBoxY = DEVICE_INFO.DEVICE_HEIGHT * 0.20
@@ -67,18 +67,9 @@ const CONTROLS = {
         params.alpha = checked ? colorsCheckBoxCoverAlpha : 0
         return params
     },
-    fullScreenRectangle(color = 0) {
-        return {
-            x:     0,
-            y:     0,
-            w:     DEVICE_INFO.DEVICE_HEIGHT,
-            h:     DEVICE_INFO.DEVICE_WIDTH,
-            color: color
-        }
-    },
     selectColorToast: {
         content: getText(TRANSLATION_KEYS.selectColor)
     }
 }
 
-export {DEVICE_INFO, COLORS, COMMON, CONTROLS, PAGES, BUTTONS}
+export {CONTROLS}

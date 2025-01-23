@@ -3,8 +3,8 @@ import {push} from '@zos/router'
 import {LocalStorage} from '@zos/storage'
 import {showToast} from '@zos/interaction'
 
-import {BUTTONS, COLORS, COMMON, CONTROLS, getText, PAGES} from './selectColors.page.layout.js';
-import {TRANSLATION_KEYS} from '../layout/common.layout';
+import {CONTROLS} from './selectColors.page.layout.js';
+import {BUTTONS, COLORS, COMMON, PAGES, TRANSLATION_KEYS} from '../layout/common.layout';
 
 const selectedColors = 'blinker.selectedColors'
 const storage = new LocalStorage()

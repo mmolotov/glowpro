@@ -159,6 +159,14 @@ export const BUTTONS = {
         normal_src: 'confirm_button.png',
         press_src:  'confirm_button_pressed.png'
     },
+    blinker:        {
+        normal_src: 'blinker.png',
+        press_src:  'blinker_pressed.png'
+    },
+    morse:          {
+        normal_src: 'morse.png',
+        press_src:  'morse_pressed.png'
+    },
     flashlightSrc(state) {
         return state ? BUTTONS.flashlightOn.normal_src : BUTTONS.flashlightOff.normal_src
     },

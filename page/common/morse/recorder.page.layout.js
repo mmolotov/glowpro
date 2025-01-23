@@ -1,7 +1,7 @@
 import {px} from '@zos/utils'
 import {getText} from '@zos/i18n';
 
-import {COLORS, COMMON, DEVICE_INFO, PAGES, TRANSLATION_KEYS} from '../layout/common.layout'
+import {COLORS, COMMON, DEVICE_INFO, TRANSLATION_KEYS} from '../layout/common.layout'
 
 const morseButtonW = DEVICE_INFO.DEVICE_WIDTH * 0.6
 const morseButtonH = DEVICE_INFO.DEVICE_HEIGHT * 0.3
@@ -30,4 +30,4 @@ const CONTROLS = {
     }
 }
 
-export {DEVICE_INFO, COLORS, CONTROLS, PAGES, COMMON}
+export {CONTROLS}

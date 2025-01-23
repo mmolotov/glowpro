@@ -1,8 +1,8 @@
 import {push} from '@zos/router'
 import {createWidget, event, prop, widget} from '@zos/ui'
 import {LocalStorage} from '@zos/storage'
-import {BUTTONS, calculateSliderValue, COMMON, CONTROLS, PAGES} from './selectInterval.page.layout.js';
-import {TRANSLATION_KEYS} from '../layout/common.layout';
+import {calculateSliderValue, CONTROLS} from './selectInterval.page.layout.js';
+import {BUTTONS, COMMON, PAGES, TRANSLATION_KEYS} from '../layout/common.layout';
 
 const selectedInterval = 'blinker.selectedInterval'
 const selectedIntervalY = 'blinker.selectedIntervalY'
@@ -23,6 +23,7 @@ Page({
     build() {
         const controlsContainer = createWidget(widget.VIEW_CONTAINER, COMMON.fullScreenContainer())
         let header = controlsContainer.createWidget(widget.TEXT, COMMON.header(TRANSLATION_KEYS.selectInterval))
+        //todo: replace slider with picker
         let sliderBar = controlsContainer.createWidget(widget.FILL_RECT, CONTROLS.sliderBar)
         let sliderControl = controlsContainer.createWidget(widget.CIRCLE, CONTROLS.sliderControl(storage.getItem(selectedIntervalY)))
         let sliderHover = controlsContainer.createWidget(widget.FILL_RECT, CONTROLS.sliderHover())

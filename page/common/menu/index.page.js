@@ -1,6 +1,7 @@
 import {createWidget, event, widget} from '@zos/ui'
 import {push} from '@zos/router'
-import {CONTROLS, PAGES} from './index.page.layout.js';
+import {CONTROLS} from './index.page.layout.js';
+import {PAGES} from '../layout/common.layout';
 
 Page({
     build() {

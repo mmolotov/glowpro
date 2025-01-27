@@ -1,6 +1,5 @@
 import {px} from '@zos/utils'
-import {getText} from '@zos/i18n'
-import {DEVICE_INFO, systemButtonSize, TRANSLATION_KEYS} from '../layout/common.layout'
+import {DEVICE_INFO, systemButtonSize} from '../layout/common.layout'
 
 const colorsCheckBoxX = DEVICE_INFO.DEVICE_WIDTH * 0.15
 const colorsCheckBoxY = DEVICE_INFO.DEVICE_HEIGHT * 0.20
@@ -66,9 +65,6 @@ const CONTROLS = {
         let params = CONTROLS.colorsCheckBoxCover(index, color)
         params.alpha = checked ? colorsCheckBoxCoverAlpha : 0
         return params
-    },
-    selectColorToast: {
-        content: getText(TRANSLATION_KEYS.selectColor)
     }
 }
 

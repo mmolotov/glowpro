@@ -2,6 +2,7 @@ import {getDeviceInfo} from '@zos/device';
 import {getText} from '@zos/i18n';
 import {align, text_style} from '@zos/ui'
 import {px} from '@zos/utils'
+import {SCROLL_MODE_SWIPER} from '@zos/page'
 
 export const {width: DEVICE_WIDTH, height: DEVICE_HEIGHT} = getDeviceInfo();
 
@@ -77,7 +78,11 @@ export const COLORS = {
         PURPLE:    0x984CE5,
         PINK:      0xF2559D
     },
-    BLACK:      0x000000
+    flashlightColor(index, fallback = COLORS.FLASHLIGHT.WHITE) {
+        let color = COLORS.FLASHLIGHT[Object.keys(COLORS.FLASHLIGHT)[index]];
+        return color ? color : fallback
+    },
+    BLACK: 0x000000
 }
 
 export const PAGES = {
@@ -114,13 +119,14 @@ export const COMMON = {
             z_index:       zIndex
         }
     },
-    fullScreenRectangle(color = 0, index = 0) {
+    fullScreenRectangle(color = 0, index = 0, alpha = 255) {
         return {
             x:     0,
             y:     0 + DEVICE_INFO.DEVICE_HEIGHT * index,
             h:     DEVICE_INFO.DEVICE_HEIGHT,
             w:     DEVICE_INFO.DEVICE_WIDTH,
-            color: color
+            color: color,
+            alpha: alpha
         }
     },
     header(translationKey = '') {
@@ -135,6 +141,15 @@ export const COMMON = {
             align_v:    align.CENTER_V,
             text_style: text_style.NONE,
             text:       getText(translationKey)
+        }
+    },
+    scrollMode(count = 0) {
+        return {
+            mode:    SCROLL_MODE_SWIPER,
+            options: {
+                height: DEVICE_INFO.DEVICE_HEIGHT,
+                count:  count
+            }
         }
     }
 }
@@ -183,5 +198,17 @@ export const BUTTONS = {
             press_src:  BUTTONS.confirm_button.press_src,
             click_func: clickCallback
         }
+    }
+}
+
+export const TOASTS = {
+    swipeToSelectColorToast: {
+        content: getText(TRANSLATION_KEYS.swipeToSelectColor)
+    },
+    selectColorToast:        {
+        content: getText(TRANSLATION_KEYS.selectColor)
+    },
+    emptyRecordToast:        {
+        content: getText(TRANSLATION_KEYS.morseEmptyRecord)
     }
 }

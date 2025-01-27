@@ -1,5 +1,4 @@
 import {px} from '@zos/utils'
-import {getText} from '@zos/i18n';
 
 import {COLORS, COMMON, DEVICE_INFO, TRANSLATION_KEYS} from '../layout/common.layout'
 
@@ -24,9 +23,6 @@ const CONTROLS = {
             press_color:  COLORS.SYS.BUTTON_PRESSED,
             click_func:   callback
         }
-    },
-    emptyRecordToast: {
-        content: getText(TRANSLATION_KEYS.morseEmptyRecord)
     }
 }
 

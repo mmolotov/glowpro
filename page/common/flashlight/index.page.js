@@ -4,6 +4,7 @@ import {showToast} from '@zos/interaction'
 
 import {COLORS, COMMON, CONTROLS} from './index.page.layout.js';
 import {getCurrentBrightnessSettings, pauseScreenOff, resetScreenOff, setBrightnessSettings} from '../../../utils';
+import {TOASTS} from '../layout/common.layout';
 
 let settings = {}
 
@@ -13,7 +14,7 @@ Page({
         pauseScreenOff()
     },
     build() {
-        setScrollMode(CONTROLS.scrollMode(Object.keys(COLORS.FLASHLIGHT).length))
+        setScrollMode(COMMON.scrollMode(Object.keys(COLORS.FLASHLIGHT).length))
 
         let state = true
         let index = 0
@@ -28,7 +29,7 @@ Page({
             setScreenBrightness(state ? 0 : 100)
         }))
         setScreenBrightness(100)
-        showToast(CONTROLS.selectColorToast)
+        showToast(TOASTS.swipeToSelectColorToast)
 
         function turnButtonSwitchState(turnOffButton, newState) {
             state = newState

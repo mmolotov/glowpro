@@ -1,6 +1,9 @@
 import {createWidget, prop, widget} from '@zos/ui'
+import {getSwiperIndex, setScrollMode} from '@zos/page'
+import {showToast} from '@zos/interaction'
+
 import {getCurrentBrightnessSettings, pauseScreenOff, resetScreenOff, setBrightnessSettings} from '../../../utils';
-import {COLORS, COMMON} from '../layout/common.layout';
+import {COLORS, COMMON, TOASTS} from '../layout/common.layout';
 
 const splitInterval = 1000
 let settings = {}
@@ -14,7 +17,13 @@ Page({
         timestamps = JSON.parse(params).intervals
     },
     build() {
-        const coloredScreen = createWidget(widget.FILL_RECT, COMMON.fullScreenRectangle())
+        setScrollMode(COMMON.scrollMode(Object.keys(COLORS.FLASHLIGHT).length))
+
+        const coloredScreens = []
+        for (let i = 0; i < Object.keys(COLORS.FLASHLIGHT).length; i++) {
+            coloredScreens.push(createWidget(widget.FILL_RECT, COMMON.fullScreenRectangle(COLORS.BLACK, i)))
+        }
+        const scrollBar = createWidget(widget.PAGE_SCROLLBAR, {})
 
         const totalDuration = timestamps[timestamps.length - 1][1] - timestamps[0][0];
         const intervals = timestamps.map((timePair, index) => {
@@ -27,24 +36,27 @@ Page({
                 duration: (timePair[1] - timePair[0])
             };
         });
+        showToast(TOASTS.swipeToSelectColorToast)
 
-        doBlinkIteration(intervals);
+        doBlinkIteration(intervals, coloredScreens);
         setInterval(() => {
-            doBlinkIteration(intervals);
+            doBlinkIteration(intervals, coloredScreens);
         }, totalDuration + splitInterval)
 
-        function doBlinkIteration(blinkIntervals = intervals) {
+        function doBlinkIteration(blinkIntervals = intervals, screens = coloredScreens) {
             for (const interval of blinkIntervals) {
                 setTimeout(() => {
-                    blink(coloredScreen, interval.duration)
+                    blink(screens, interval.duration)
                 }, interval.interval)
             }
         }
 
-        function blink(coloredScreen, duration) {
-            coloredScreen.setProperty(prop.MORE, COMMON.fullScreenRectangle(COLORS.FLASHLIGHT.WHITE))
+        function blink(screens = coloredScreens, duration = 1) {
+            let index = getSwiperIndex() - 1
+            const screen = screens[index]
+            screen.setProperty(prop.MORE, COMMON.fullScreenRectangle(COLORS.flashlightColor(index), index))
             setTimeout(() => {
-                coloredScreen.setProperty(prop.MORE, COMMON.fullScreenRectangle(COLORS.BLACK))
+                screen.setProperty(prop.MORE, COMMON.fullScreenRectangle(COLORS.BLACK, index))
             }, duration)
         }
     },

@@ -4,7 +4,7 @@ import {LocalStorage} from '@zos/storage'
 import {showToast} from '@zos/interaction'
 
 import {CONTROLS} from './selectColors.page.layout.js';
-import {BUTTONS, COLORS, COMMON, PAGES, TRANSLATION_KEYS} from '../layout/common.layout';
+import {BUTTONS, COLORS, COMMON, PAGES, TOASTS, TRANSLATION_KEYS} from '../layout/common.layout';
 
 const selectedColors = 'blinker.selectedColors'
 const storage = new LocalStorage()
@@ -80,7 +80,7 @@ Page({
                     params: colors
                 })
             } else {
-                showToast(CONTROLS.selectColorToast)
+                showToast(TOASTS.selectColorToast)
             }
         }))
     }, onDestroy(options) {

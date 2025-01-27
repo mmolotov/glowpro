@@ -3,7 +3,7 @@ import {getText} from '@zos/i18n';
 import {TRANSLATION_KEYS} from '../layout/common.layout'
 
 //slider
-const pickerValueMin = 100
+const pickerValueMin = 50
 const pickerValueMax = 1_000
 const pickerValueStep = 50
 
@@ -17,7 +17,7 @@ const CONTROLS = {
         return {
             nb_of_columns: 1,
             title:         getText(TRANSLATION_KEYS.selectInterval),
-            data_config: [
+            data_config:   [
                 {
                     data_array:     pickerIntervals,
                     support_loop:   true,
@@ -25,7 +25,7 @@ const CONTROLS = {
                     unit:           getText(TRANSLATION_KEYS.milis)
                 }
             ],
-            picker_cb:   callback
+            picker_cb:     callback
         }
     }
 }

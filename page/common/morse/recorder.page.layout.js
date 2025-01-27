@@ -10,7 +10,7 @@ const CONTROLS = {
     recorderLabel() {
         let props = COMMON.header(TRANSLATION_KEYS.morseSetup)
         props.y = px(60)
-        props.h = px(85)
+        props.h = px(115)
         return props
     },
     morseButton(callback) {

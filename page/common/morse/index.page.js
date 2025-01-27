@@ -1,15 +1,10 @@
 import {createWidget, prop, widget} from '@zos/ui'
-import {Time} from '@zos/sensor';
-import {getCurrentBrightnessSettings, logger, pauseScreenOff, resetScreenOff, setBrightnessSettings} from '../../../utils';
+import {getCurrentBrightnessSettings, pauseScreenOff, resetScreenOff, setBrightnessSettings} from '../../../utils';
 import {COLORS, COMMON} from '../layout/common.layout';
 
+const splitInterval = 1000
 let settings = {}
 let timestamps = []
-const TIME = new Time()
-
-const minInterval = 200
-const blinkInterval = 80
-const splitInterval = 1000
 
 Page({
     onInit(params) {
@@ -21,36 +16,36 @@ Page({
     build() {
         const coloredScreen = createWidget(widget.FILL_RECT, COMMON.fullScreenRectangle())
 
-        const totalDuration = timestamps[timestamps.length - 1] - timestamps[0];
-        const intervals = timestamps.map((time, index) => {
-            if (index === 0) {
-                return 0;
+        const totalDuration = timestamps[timestamps.length - 1][1] - timestamps[0][0];
+        const intervals = timestamps.map((timePair, index) => {
+            let interval = 0
+            if (index !== 0) {
+                interval = timePair[0] - timestamps[0][0];
             }
-            return time - timestamps[0];
+            return {
+                interval: interval,
+                duration: (timePair[1] - timePair[0])
+            };
         });
-        logger.info('timestamps: ', timestamps)
-        logger.info('totalDuration: ', totalDuration)
-        logger.info('intervals: ', intervals)
 
-        blink(coloredScreen)
-        for (const interval of intervals) {
-            setTimeout(() => {
-                blink(coloredScreen)
-            }, interval)
-        }
+        doBlinkIteration(intervals);
         setInterval(() => {
-            for (const interval of intervals) {
-                setTimeout(() => {
-                    blink(coloredScreen)
-                }, interval)
-            }
+            doBlinkIteration(intervals);
         }, totalDuration + splitInterval)
 
-        function blink(coloredScreen) {
+        function doBlinkIteration(blinkIntervals = intervals) {
+            for (const interval of blinkIntervals) {
+                setTimeout(() => {
+                    blink(coloredScreen, interval.duration)
+                }, interval.interval)
+            }
+        }
+
+        function blink(coloredScreen, duration) {
             coloredScreen.setProperty(prop.MORE, COMMON.fullScreenRectangle(COLORS.FLASHLIGHT.WHITE))
             setTimeout(() => {
                 coloredScreen.setProperty(prop.MORE, COMMON.fullScreenRectangle(COLORS.BLACK))
-            }, blinkInterval)
+            }, duration)
         }
     },
     onDestroy() {

@@ -24,6 +24,8 @@ function getTextY(index) {
     return getButtonY(index) + (buttonSize - textH) / 2
 }
 
+const hoverW = DEVICE_INFO.DEVICE_WIDTH * 0.6
+
 const CONTROLS = {
     button(index, normal_src, press_src, clickCallback) {
         return {
@@ -47,11 +49,25 @@ const CONTROLS = {
             text:      getText(textKey)
         }
     },
+    hover(index) {
+        return {
+            x:      buttonX,
+            y:      getButtonY(index),
+            h:      buttonSize,
+            w:      hoverW,
+            color:  COLORS.SYS.BUTTON,
+            alpha:  0,
+            radius: 50
+        }
+    },
     flashlightButton(clickCallback) {
         return CONTROLS.button(0, BUTTONS.flashlightOff.normal_src, BUTTONS.flashlightOff.press_src, clickCallback)
     },
     flashlightText() {
         return CONTROLS.text(0, TRANSLATION_KEYS.flashlight)
+    },
+    flashlightHover() {
+        return CONTROLS.hover(0)
     },
     blinkerButton(clickCallback) {
         return CONTROLS.button(1, BUTTONS.blinker.normal_src, BUTTONS.blinker.press_src, clickCallback)
@@ -59,11 +75,17 @@ const CONTROLS = {
     blinkerText() {
         return CONTROLS.text(1, TRANSLATION_KEYS.blinker)
     },
+    blinkerHover() {
+        return CONTROLS.hover(1)
+    },
     morseButton(clickCallback) {
         return CONTROLS.button(2, BUTTONS.morse.normal_src, BUTTONS.morse.press_src, clickCallback)
     },
     morseText() {
         return CONTROLS.text(2, TRANSLATION_KEYS.morse)
+    },
+    morseHover() {
+        return CONTROLS.hover(2)
     }
 }
 

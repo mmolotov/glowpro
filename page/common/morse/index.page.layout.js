@@ -1,0 +1,3 @@
+const CONTROLS = {}
+
+export {CONTROLS}

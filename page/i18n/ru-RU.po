@@ -1,0 +1,38 @@
+msgid "appName"
+msgstr "GlowPro"
+
+msgid "flashlight"
+msgstr "Фонарь"
+
+msgid "blinker"
+msgstr "Мигалка"
+
+msgid "morse"
+msgstr "Морзе"
+
+msgid "ms"
+msgstr "мс"
+
+msgid "select_color"
+msgstr "Выбери хотя бы \nодин цвет"
+
+msgid "swipe_to_select_color"
+msgstr "Листай вниз \nдля смены \nцвета"
+
+msgid "select_interval"
+msgstr "Выбери интервал"
+
+msgid "select_colors"
+msgstr "Выбери цветa"
+
+msgid "morse_setup"
+msgstr "Нажми или удерживай \nдля записи сообщения"
+
+msgid "morse_empty_record"
+msgstr "Запись пуста"
+
+msgid "disclaimer_text_s"
+msgstr "Внимание! \nЯркие цвета \nи мерцание! \nОсторожно при \nсвето \nчувствитель \nности."
+
+msgid "disclaimer_text_r"
+msgstr "Внимание! \nЯркие цвета и мерцание! Осторожно при светочувствитель \nности."

@@ -1,0 +1,62 @@
+{
+  "configVersion": "v3",
+  "app": {
+    "appId": 1070818,
+    "appName": "GlowPro",
+    "appType": "app",
+    "version": {
+      "code": 1,
+      "name": "1.0.0"
+    },
+    "icon": "icon.png",
+    "vender": "zepp",
+    "description": "Advanced flashlight and more"
+  },
+  "permissions": [
+    "data:os.device.info",
+    "device:os.local_storage"
+  ],
+  "runtime": {
+    "apiVersion": {
+      "compatible": "3.0.0",
+      "target": "3.0.0",
+      "minVersion": "3.0"
+    }
+  },
+  "debug": false,
+  "targets": {
+    "common": {
+      "module": {
+        "page": {
+          "pages": [
+            "page/common/menu/index.page",
+            "page/common/blinker/blinker.page",
+            "page/common/blinker/selectColors.page",
+            "page/common/blinker/selectInterval.page",
+            "page/common/flashlight/index.page",
+            "page/common/morse/index.page",
+            "page/common/morse/recorder.page"
+          ]
+        }
+      },
+      "platforms": [
+        {
+          "st": "r"
+        },
+        {
+          "st": "s"
+        }
+      ],
+      "designWidth": 480
+    }
+  },
+  "i18n": {
+    "en-US": {
+      "appName": "GlowPro"
+    },
+    "ru-RU": {
+      "appName": "GlowPro"
+    }
+  },
+  "defaultLanguage": "en-US"
+}

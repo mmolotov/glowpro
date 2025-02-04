@@ -1,0 +1,38 @@
+msgid "appName"
+msgstr "GlowPro"
+
+msgid "flashlight"
+msgstr "Flashlight"
+
+msgid "blinker"
+msgstr "Blinker"
+
+msgid "morse"
+msgstr "Morse"
+
+msgid "ms"
+msgstr "ms"
+
+msgid "select_color"
+msgstr "Select at least \none color"
+
+msgid "swipe_to_select_color"
+msgstr "Swipe down \nto select color"
+
+msgid "select_interval"
+msgstr "Select interval"
+
+msgid "select_colors"
+msgstr "Select colors"
+
+msgid "morse_setup"
+msgstr "Tap or hold to record \nyour Morse message"
+
+msgid "morse_empty_record"
+msgstr "Record is empty"
+
+msgid "disclaimer_text_s"
+msgstr "Warning! \nBright colors \n& flashing! \nUse with caution \nif sensitive."
+
+msgid "disclaimer_text_r"
+msgstr "Warning! \nBright colors & flashing! Use with caution if sensitive."

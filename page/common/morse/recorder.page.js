@@ -3,7 +3,7 @@ import {push} from '@zos/router'
 import {Time} from '@zos/sensor';
 import {showToast} from '@zos/interaction'
 
-import {CONTROLS} from './recorder.page.layout.js';
+import {CONTROLS} from 'zosLoader:./recorder.page.[pf].layout.js';
 import {BUTTONS, PAGES, TOASTS} from '../layout/common.layout';
 
 const TIME = new Time()

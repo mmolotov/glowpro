@@ -1,6 +1,8 @@
 import {createWidget, event, widget} from '@zos/ui'
 import {push} from '@zos/router'
-import {CONTROLS} from './index.page.layout.js';
+import {createModal, MODAL_CONFIRM} from '@zos/interaction'
+
+import {CONTROLS} from 'zosLoader:./index.page.[pf].layout.js';
 import {PAGES} from '../layout/common.layout';
 
 Page({
@@ -9,12 +11,11 @@ Page({
             push({url: PAGES.flashlight})
         }
         const routeBlinker = () => {
-            push({url: PAGES.blinkerSelectColors})
+            showDisclaimer({url: PAGES.blinkerSelectColors})
         }
         const routeMorse = () => {
-            push({url: PAGES.morseSetup})
+            showDisclaimer({url: PAGES.morseSetup})
         }
-
         const flashlightHover = createWidget(widget.FILL_RECT, CONTROLS.flashlightHover())
         flashlightHover.addEventListener(event.CLICK_UP, routeFlashlight)
         const flashlightButton = createWidget(widget.BUTTON, CONTROLS.flashlightButton(routeFlashlight));
@@ -32,5 +33,18 @@ Page({
         const morseButton = createWidget(widget.BUTTON, CONTROLS.morseButton(routeMorse));
         const morseText = createWidget(widget.TEXT, CONTROLS.morseText())
         morseText.addEventListener(event.CLICK_UP, routeMorse)
+
+        function showDisclaimer(pushParams) {
+            const confirmCallback = (keyObj) => {
+                const {type} = keyObj
+                if (type === MODAL_CONFIRM) {
+                    push(pushParams)
+                } else {
+                    disclaimer.show(false)
+                }
+            }
+            const disclaimer = createModal(CONTROLS.disclaimer(confirmCallback))
+            disclaimer.show(true)
+        }
     }
 });

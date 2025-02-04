@@ -91,12 +91,14 @@ export const PAGES = {
     blinkerSelectInterval: 'page/common/blinker/selectInterval.page',
     flashlight:            'page/common/flashlight/index.page',
     menu:                  'page/common/menu/index.page',
-    morseSetup:            'page/common/morse/recorder.page',
-    morse:                 'page/common/morse/index.page'
+    morse:                 'page/common/morse/index.page',
+    morseSetup:            'page/common/morse/recorder.page'
 }
 
 export const TRANSLATION_KEYS = {
     blinker:            'blinker',
+    disclaimerText_r:   'disclaimer_text_r',
+    disclaimerText_s:   'disclaimer_text_s',
     flashlight:         'flashlight',
     milis:              'ms',
     morse:              'morse',
@@ -133,7 +135,7 @@ export const COMMON = {
         return {
             x:          DEVICE_INFO.DEVICE_WIDTH * 0.2,
             y:          px(40),
-            w:          DEVICE_INFO.DEVICE_HEIGHT * 3 / 5,
+            w:          DEVICE_INFO.DEVICE_WIDTH * 3 / 5,
             h:          px(40),
             color:      COLORS.TEXT.TITLE,
             text_size:  35,

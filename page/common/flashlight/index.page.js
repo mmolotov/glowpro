@@ -17,7 +17,7 @@ Page({
         setScrollMode(COMMON.scrollMode(Object.keys(COLORS.FLASHLIGHT).length))
 
         let state = true
-        let index = 0
+        let index = 0 //todo: remember last selected color
         for (let key in COLORS.FLASHLIGHT) {
             const color = COLORS.FLASHLIGHT[key]
             const coloredScreen = createWidget(widget.FILL_RECT, COMMON.fullScreenRectangle(color, index++))

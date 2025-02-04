@@ -34,8 +34,8 @@
             "page/common/blinker/selectColors.page",
             "page/common/blinker/selectInterval.page",
             "page/common/flashlight/index.page",
-            "page/common/morse/recorder.page",
-            "page/common/morse/index.page"
+            "page/common/morse/index.page",
+            "page/common/morse/recorder.page"
           ]
         }
       },

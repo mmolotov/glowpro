@@ -2,7 +2,7 @@ import {getDeviceInfo} from '@zos/device';
 import {getText} from '@zos/i18n';
 import {align, text_style} from '@zos/ui'
 import {px} from '@zos/utils'
-import {SCROLL_MODE_SWIPER} from '@zos/page'
+import {SCROLL_MODE_SWIPER, swipeToIndex} from '@zos/page'
 
 export const {width: DEVICE_WIDTH, height: DEVICE_HEIGHT} = getDeviceInfo();
 
@@ -149,10 +149,19 @@ export const COMMON = {
         return {
             mode:    SCROLL_MODE_SWIPER,
             options: {
-                height: DEVICE_INFO.DEVICE_HEIGHT,
-                count:  count
+                height:     DEVICE_INFO.DEVICE_HEIGHT,
+                count:      count,
+                modeParams: {
+                    crown_enable: true
+                }
             }
         }
+    },
+    swipeToSelectedScreen(index = 0, maxIndex = Object.keys(COLORS.FLASHLIGHT).length) {
+        index = index || 0
+        swipeToIndex({
+            index: Math.max(0, Math.min(index - 1, maxIndex))
+        })
     }
 }
 export const standardBottomButtonSize = 88

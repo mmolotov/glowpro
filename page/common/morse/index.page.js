@@ -1,10 +1,14 @@
 import {createWidget, prop, widget} from '@zos/ui'
 import {getSwiperIndex, setScrollMode} from '@zos/page'
 import {showToast} from '@zos/interaction'
+import {LocalStorage} from '@zos/storage'
 
 import {getCurrentBrightnessSettings, pauseScreenOff, resetScreenOff, setBrightnessSettings} from '../../../utils';
 import {COLORS, COMMON, TOASTS} from '../layout/common.layout';
 
+const colorsCount = Object.keys(COLORS.FLASHLIGHT).length;
+const selectedColor = 'morse.selectedColor'
+const storage = new LocalStorage()
 const splitInterval = 1000
 let settings = {}
 let timestamps = []
@@ -17,13 +21,14 @@ Page({
         timestamps = JSON.parse(params).intervals
     },
     build() {
-        setScrollMode(COMMON.scrollMode(Object.keys(COLORS.FLASHLIGHT).length))
+        setScrollMode(COMMON.scrollMode(colorsCount))
 
         const coloredScreens = []
-        for (let i = 0; i < Object.keys(COLORS.FLASHLIGHT).length; i++) {
+        for (let i = 0; i < colorsCount; i++) {
             coloredScreens.push(createWidget(widget.FILL_RECT, COMMON.fullScreenRectangle(COLORS.BLACK, i)))
         }
         const scrollBar = createWidget(widget.PAGE_SCROLLBAR, {})
+        COMMON.swipeToSelectedScreen(storage.getItem(selectedColor));
 
         const totalDuration = timestamps[timestamps.length - 1][1] - timestamps[0][0];
         const intervals = timestamps.map((timePair, index) => {
@@ -61,6 +66,7 @@ Page({
         }
     },
     onDestroy() {
+        storage.setItem(selectedColor, getSwiperIndex())
         resetScreenOff()
         setBrightnessSettings(settings)
     }

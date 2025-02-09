@@ -10,7 +10,7 @@ import {
     setBrightness
 } from '@zos/display'
 
-export const logger = Logger.getLogger('timerr');
+export const logger = Logger.getLogger('glowpro');
 
 export function assets(type) {
     return (path) => type + '/' + path;
